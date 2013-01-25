@@ -253,7 +253,7 @@ trait OAuthProvider { self: OAuthStores =>
     } yield {
       if(Signatures.verify(method, url, p, consumer.secret, "")) {
          val (key, secret) = tokens.generate
-         tokens.put(RequestToken(key, secret, consumer.key, p(Callback)(0)
+         tokens.put(RequestToken(key, secret, consumer.key, p(Callback)(0)))
          TokenResponse(key, secret, true)
       } else challenge(400, "invalid signature")
     }) getOrElse challenge(400, "invalid consumer")
